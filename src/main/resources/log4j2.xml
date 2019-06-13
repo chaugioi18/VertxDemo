@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="log-path">
+            logs
+        </Property>
+        <Property name="backup-log-path">
+            logs/backup
+        </Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="Intelin-authentication-error"
+                     fileName="${log-path}/Intelin-authentication-error.log"
+                     filePattern="${backup-log-path}/Intelin-authentication-error-%d{yyyy-MMM-dd}-%i.log.gz"
+                     immediateFlush="true" append="true">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%t] %c{10} [%L] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="Intelin-authentication-debug"
+                     fileName="${log-path}/Intelin-authentication-debug.log"
+                     filePattern="${backup-log-path}/Intelin-authentication-debug-%d{yyyy-MMM-dd}-%i.log.gz"
+                     immediateFlush="true" append="true">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%t] %c{10} [%L] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="Intelin-authentication-info"
+                     fileName="${log-path}/Intelin-authentication-info.log"
+                     filePattern="${backup-log-path}/Intelin-authentication-info-%d{yyyy-MMM-dd}-%i.log.gz"
+                     immediateFlush="true" append="true">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%t] %c{10} [%L] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="Intelin-authentication-trace"
+                     fileName="${log-path}/Intelin-authentication-trace.log"
+                     filePattern="${backup-log-path}/Intelin-authentication-trace-%d{yyyy-MMM-dd}-%i.log.gz"
+                     immediateFlush="true" append="true">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%t] %c{10} [%L] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 M"/>
+            </Policies>
+        </RollingFile>
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%T] %c{1} -%M %c{10} - %msg%n}{FATAL=red, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=white bold, TRACE=gray}"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.zaxxer.hikari" level="error"/>
+        <Root level="All">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Intelin-authentication-error" level="error"/>
+            <AppenderRef ref="Intelin-authentication-info" level="info"/>
+            <AppenderRef ref="Intelin-authentication-debug" level="debug"/>
+            <AppenderRef ref="Intelin-authentication-trace" level="trace"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>
